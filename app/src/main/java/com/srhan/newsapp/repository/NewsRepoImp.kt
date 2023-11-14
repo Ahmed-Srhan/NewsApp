@@ -12,14 +12,17 @@ class NewsRepoImp constructor(
     private val newsDao: NewsDao
 ) : NewsRepo {
 
-    override suspend fun getBreakingNews(countryCode: String, breakingNewsPage:Int): Response<NewsResponse> =
-        newsApiService.getBreakingNews(countryCode,breakingNewsPage)
+    override suspend fun getBreakingNews(
+        countryCode: String,
+        breakingNewsPage: Int
+    ): Response<NewsResponse> =
+        newsApiService.getBreakingNews(countryCode, breakingNewsPage)
 
     override suspend fun searchNews(searchQuery: String, searchPage: Int): Response<NewsResponse> =
-                    newsApiService.searchForNews(searchQuery,searchPage)
+        newsApiService.searchForNews(searchQuery, searchPage)
 
 
-    override suspend fun insertArticle(article: Article)= newsDao.insertArticle(article)
+    override suspend fun insertArticle(article: Article) = newsDao.insertArticle(article)
 
     override fun getAllArticle(): LiveData<List<Article>> = newsDao.getAllArticle()
     override suspend fun deleteArticle(article: Article) = newsDao.deleteArticle(article)

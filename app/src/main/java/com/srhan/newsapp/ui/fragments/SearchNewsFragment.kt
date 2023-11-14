@@ -17,9 +17,9 @@ import com.srhan.newsapp.R
 import com.srhan.newsapp.adapters.NewsAdapter
 import com.srhan.newsapp.databinding.FragmentSearchNewsBinding
 import com.srhan.newsapp.models.Article
-import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.util.Constants.Companion.PAGE_SIZE
 import com.srhan.newsapp.util.Constants.Companion.SEARCH_NEWS_TIME_DELAY
+import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.viewmodel.NewsViewModel
 import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint

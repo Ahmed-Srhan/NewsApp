@@ -16,8 +16,8 @@ import com.srhan.newsapp.R
 import com.srhan.newsapp.adapters.NewsAdapter
 import com.srhan.newsapp.databinding.FragmentBreakingNewsBinding
 import com.srhan.newsapp.models.Article
-import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.util.Constants.Companion.PAGE_SIZE
+import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.viewmodel.NewsViewModel
 import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,7 +66,11 @@ class BreakingNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
                     is Resource.Error -> {
                         hideProgressBar()
                         response.let { message ->
-                            Toast.makeText(activity, "On Error occurred : ${message.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                "On Error occurred : ${message.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
 
