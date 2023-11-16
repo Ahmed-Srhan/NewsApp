@@ -8,7 +8,6 @@ import android.widget.AbsListView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,29 +16,33 @@ import com.srhan.newsapp.R
 import com.srhan.newsapp.adapters.NewsAdapter
 import com.srhan.newsapp.databinding.FragmentSearchNewsBinding
 import com.srhan.newsapp.models.Article
+import com.srhan.newsapp.ui.MainActivity
 import com.srhan.newsapp.util.Constants.Companion.PAGE_SIZE
 import com.srhan.newsapp.util.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.viewmodel.NewsViewModel
-import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 
 class SearchNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
-    @Inject
-    lateinit var viewModelFactory: NewsViewModelProvider
-    private val newsViewModel: NewsViewModel by activityViewModels { viewModelFactory }
+
 
     private lateinit var binding: FragmentSearchNewsBinding
     private lateinit var newsAdapter: NewsAdapter
-
+    lateinit var newsViewModel: NewsViewModel
     lateinit var textSearch: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        newsViewModel = (activity as MainActivity).viewModel
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

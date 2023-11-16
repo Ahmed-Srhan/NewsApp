@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: NewsViewModelProvider
 
-    private val newsViewModel: NewsViewModel by viewModels { viewModelFactory }
+     val viewModel: NewsViewModel by viewModels { viewModelFactory }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -16,22 +15,23 @@ import com.srhan.newsapp.R
 import com.srhan.newsapp.adapters.NewsAdapter
 import com.srhan.newsapp.databinding.FragmentSaveNewsBinding
 import com.srhan.newsapp.models.Article
+import com.srhan.newsapp.ui.MainActivity
 import com.srhan.newsapp.viewmodel.NewsViewModel
-import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 
 class SaveNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
-    @Inject
-    lateinit var viewModelFactory: NewsViewModelProvider
+
     lateinit var binding: FragmentSaveNewsBinding
     lateinit var newsAdapter: NewsAdapter
+    lateinit var newsViewModel: NewsViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    private val newsViewModel: NewsViewModel by activityViewModels { viewModelFactory }
-
+        newsViewModel = (activity as MainActivity).viewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class SaveNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         newsViewModel.getAllArticle().observe(viewLifecycleOwner, Observer { articles ->
-            newsAdapter.differ.submitList(articles)
+            newsAdapter.differ.submitList(articles.toList())
 
         })
 

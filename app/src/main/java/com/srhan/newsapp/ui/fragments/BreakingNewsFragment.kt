@@ -16,6 +16,7 @@ import com.srhan.newsapp.R
 import com.srhan.newsapp.adapters.NewsAdapter
 import com.srhan.newsapp.databinding.FragmentBreakingNewsBinding
 import com.srhan.newsapp.models.Article
+import com.srhan.newsapp.ui.MainActivity
 import com.srhan.newsapp.util.Constants.Companion.PAGE_SIZE
 import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.viewmodel.NewsViewModel
@@ -27,12 +28,16 @@ import javax.inject.Inject
 @AndroidEntryPoint
 
 class BreakingNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
-    @Inject
-    lateinit var viewModelFactory: NewsViewModelProvider
 
-    private val newsViewModel: NewsViewModel by activityViewModels { viewModelFactory }
+
+    lateinit var  newsViewModel: NewsViewModel
     private lateinit var binding: FragmentBreakingNewsBinding
     private lateinit var newsAdapter: NewsAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        newsViewModel=(activity as MainActivity).viewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +82,6 @@ class BreakingNewsFragment : Fragment(), NewsAdapter.NewsOnItemClickListener {
                     is Resource.Loading -> {
                         showProgressBar()
                     }
-
                     else -> {
 
                     }
