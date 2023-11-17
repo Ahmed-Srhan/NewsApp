@@ -19,8 +19,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
 
-//    @Inject
-//    lateinit var viewModelFactory: NewsViewModelProvider
+
     lateinit var binding: FragmentArticleBinding
     lateinit var newsViewModel: NewsViewModel
     private val args: ArticleFragmentArgs by navArgs()
