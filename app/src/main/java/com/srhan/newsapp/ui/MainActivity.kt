@@ -10,9 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.srhan.newsapp.R
 import com.srhan.newsapp.databinding.ActivityMainBinding
 import com.srhan.newsapp.viewmodel.NewsViewModel
-import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

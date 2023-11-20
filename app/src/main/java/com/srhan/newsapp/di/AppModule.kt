@@ -1,12 +1,12 @@
 package com.srhan.newsapp.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.srhan.newsapp.NewsApp
 import com.srhan.newsapp.db.NewsDao
 import com.srhan.newsapp.db.NewsDatabase
 import com.srhan.newsapp.remote.NewsApiService
-import com.srhan.newsapp.repository.NewsRepo
-import com.srhan.newsapp.repository.NewsRepoImp
 import com.srhan.newsapp.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -77,9 +77,5 @@ object AppModule {
         return retrofit.create(NewsApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun provideNewsRepo(newsApiService: NewsApiService, newsDao: NewsDao): NewsRepo {
-        return NewsRepoImp(newsApiService, newsDao)
-    }
+
 }

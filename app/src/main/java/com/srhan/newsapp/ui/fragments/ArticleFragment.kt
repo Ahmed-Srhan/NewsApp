@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.srhan.newsapp.databinding.FragmentArticleBinding
 import com.srhan.newsapp.ui.MainActivity
 import com.srhan.newsapp.viewmodel.NewsViewModel
-import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
@@ -43,7 +40,7 @@ class ArticleFragment : Fragment() {
         val article = args.article
         binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            article.url?.let { loadUrl(it) }
         }
         binding.fab.setOnClickListener {
             newsViewModel.insertArticle(article)

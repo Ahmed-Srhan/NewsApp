@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,10 +19,8 @@ import com.srhan.newsapp.ui.MainActivity
 import com.srhan.newsapp.util.Constants.Companion.PAGE_SIZE
 import com.srhan.newsapp.util.Resource
 import com.srhan.newsapp.viewmodel.NewsViewModel
-import com.srhan.newsapp.viewmodel.NewsViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 

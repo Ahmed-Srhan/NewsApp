@@ -13,9 +13,10 @@ import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.srhan.newsapp.NewsApp
+import com.srhan.newsapp.db.NewsDao
 import com.srhan.newsapp.models.Article
 import com.srhan.newsapp.models.NewsResponse
-import com.srhan.newsapp.repository.NewsRepo
+import com.srhan.newsapp.remote.NewsApiService
 import com.srhan.newsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +29,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     app: Application,
-    private val newsRepo: NewsRepo
+    private val apiService: NewsApiService,
+    private val newsDao: NewsDao
 ) : AndroidViewModel(app) {
 
     private val _breakingNews: MutableStateFlow<Resource<NewsResponse>?> = MutableStateFlow(null)
@@ -92,22 +94,22 @@ class NewsViewModel @Inject constructor(
     }
 
     fun insertArticle(article: Article) = viewModelScope.launch {
-        newsRepo.insertArticle(article)
+        newsDao.insertArticle(article)
     }
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
-        newsRepo.deleteArticle(article)
+        newsDao.deleteArticle(article)
     }
 
     fun getAllArticle() =
-        newsRepo.getAllArticle()
+        newsDao.getAllArticle()
 
     private suspend fun safeBreakingNewsCall(countryCode: String) {
         _breakingNews.value = (Resource.Loading())
 
         try {
             if (hasInternetConnection()) {
-                val response = newsRepo.getBreakingNews(countryCode, breakingNewsPage)
+                val response = apiService.getBreakingNews(countryCode, breakingNewsPage)
                 _breakingNews.value = handelBreakingNewsResponse(response)
             } else {
                 _breakingNews.value = Resource.Error("No internet connection")
@@ -125,7 +127,7 @@ class NewsViewModel @Inject constructor(
 
         try {
             if (hasInternetConnection()) {
-                val response = newsRepo.searchNews(searchQuery, searchNewsPage)
+                val response = apiService.searchForNews(searchQuery, searchNewsPage)
                 _searchNews.value = handelSearchNewsResponse(response)
             } else {
                 _searchNews.value = Resource.Error("No internet connection")
