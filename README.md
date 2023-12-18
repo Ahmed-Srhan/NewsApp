@@ -10,7 +10,7 @@ A simple news app that allows users to get headlines and search articles.
 - Retrofit2 & OkHttp3 to handle apis requests.
 - Navigation Component
 - Room DataBase to cache the data and display it in case there is no internet
-- Glade to load images from internet.
+- Glide to load images from internet.
 - CardView, RecyclerView
 
 - ## Overview
